@@ -41,3 +41,5 @@ router.get('/type/:id/update', typeController.typeUpdateGet);
 router.post('/type/:id/update', typeController.typeUpdatePost);
 
 router.get('/type/:id', typeController.typeDetail);
+
+module.exports = router;
