@@ -4,7 +4,17 @@ const async = require('async');
 const { body, param, validationResult } = require('express-validator');
 
 exports.typeList = (req, res, next) => {
-    res.send('typeList');
+    Type.find({}, 'name')
+        .sort({ name: 1 })
+        .exec(function (err, types) {
+            if (err) {
+                return next(err);
+            }
+            res.render('type-list', {
+                title: 'Type list',
+                typeList: types,
+            });
+        });
 };
 
 exports.typeCreateGet = (req, res, next) => {
@@ -16,21 +26,21 @@ exports.typeCreatePost = (req, res, next) => {
 };
 
 exports.typeDeleteGet = (req, res, next) => {
-    res.send('typeDeleteGet')
-}
+    res.send('typeDeleteGet');
+};
 
 exports.typeDeletePost = (req, res, next) => {
-    res.send('typeDeletePost')
-}
+    res.send('typeDeletePost');
+};
 
 exports.typeUpdateGet = (req, res, next) => {
-    res.send('typeUpdateGet')
-}
+    res.send('typeUpdateGet');
+};
 
 exports.typeUpdatePost = (req, res, next) => {
-    res.send('typeUpdatePost')
-}
+    res.send('typeUpdatePost');
+};
 
 exports.typeDetail = (req, res, next) => {
-    res.send('typeDetail')
-}
+    res.send('typeDetail');
+};

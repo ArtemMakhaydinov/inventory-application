@@ -8,8 +8,6 @@ const typeController = require('../controllers/type-controller');
 
 router.get('/', pokemonController.index);
 
-router.get('/pokemons', pokemonController.pokemonList);
-
 router.get('/pokemon/create', pokemonController.pokemonCreateGet);
 
 router.post('/pokemon/create', pokemonController.pokemonCreatePost);
@@ -18,15 +16,16 @@ router.get('/pokemon/:id/delete', pokemonController.pokemonDeleteGet);
 
 router.post('/pokemon/:id/delete', pokemonController.pokemonDeletePost);
 
-router.get('./pokemon/:id/update', pokemonController.pokemonUpdateGet);
+router.get('/pokemon/:id/update', pokemonController.pokemonUpdateGet);
 
-router.post('./pokemon/:id/update', pokemonController.pokemonUpdatePost);
+router.post('/pokemon/:id/update', pokemonController.pokemonUpdatePost);
 
-router.get('./pokemon/:id', pokemonController.pokemonDetail);
+router.get('/pokemon/:id', pokemonController.pokemonDetail);
+
+router.get('/pokemons', pokemonController.pokemonList);
 
 // TYPE ROUTES
 
-router.get('/types', typeController.typeList);
 
 router.get('/type/create', typeController.typeCreateGet);
 
@@ -41,5 +40,7 @@ router.get('/type/:id/update', typeController.typeUpdateGet);
 router.post('/type/:id/update', typeController.typeUpdatePost);
 
 router.get('/type/:id', typeController.typeDetail);
+
+router.get('/types', typeController.typeList);
 
 module.exports = router;

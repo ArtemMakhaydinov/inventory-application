@@ -4,11 +4,21 @@ const async = require('async');
 const { body, param, validationResult } = require('express-validator');
 
 exports.index = (req, res, next) => {
-    res.send('index');
+    res.send('index')
 };
 
 exports.pokemonList = (req, res, next) => {
-    res.send('pokemonList');
+    Pokemon.find({}, 'name serial_number')
+        .sort({ name: 1 })
+        .exec(function (err, pokemons) {
+            if (err) {
+                return next(err);
+            }
+            res.render('pokemon-list', {
+                title: 'Pokemon list',
+                pokemonList: pokemons,
+            });
+        });
 };
 
 exports.pokemonCreateGet = (req, res, next) => {

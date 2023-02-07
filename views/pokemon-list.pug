@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  - const columns = 6
+  - const columnDefaultHeight = 5
+  - const columnHeight = (pokemonList.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(pokemonList.length / columns)
+  - for (let i = 0; i <= pokemonList.length / columnHeight; i++) {
+    div(class='col-2' style='margin-top: 1rem; line-height: 2rem')
+      ul
+        - let columnArray = pokemonList.slice((i * columnHeight), ((i + 1) * columnHeight))
+        each pokemon in columnArray
+          li
+            a(href=pokemon.url) #{`${pokemon.formatted_serial_number} ${pokemon.name}`}
+
+        if pokemonList.length === 0
+          li There are no pokemons.
+  - }

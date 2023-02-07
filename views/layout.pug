@@ -4,41 +4,27 @@ html(lang='en')
     title= title
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous")
     script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
-    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    div(class='container-fluid')
-      div(class='container-fluid h-47')
-
-
-
-      //- div(class='row')
-      //-   div(class='col-sm-2')
-      //-     block sidebar
-      //-       ul(class='sidebar-nav')
-      //-         li
-      //-           a(href='/catalog') Home
-      //-         li
-      //-           a(href='/catalog/books') All books
-      //-         li
-      //-           a(href='/catalog/authors') All authors
-      //-         li
-      //-           a(href='/catalog/genres') All genres
-      //-         li
-      //-           a(href='/catalog/bookinstances') All book-instances
-      //-         li
-      //-           hr
-      //-         li
-      //-           a(href='/catalog/author/create') Create new author
-      //-         li
-      //-           a(href='/catalog/genre/create') Create new genre
-      //-         li
-      //-           a(href='/catalog/book/create') Create new book
-      //-         li
-      //-           a(href='/catalog/bookinstance/create') Create new book instance (copy)
-
-      //-   div(class='col-sm-10')
-      //-     block content
+    div(class='container-fluid position-absolute wallpaper-container')
+      div(class='container-fluid wallpaper-red')
+      div(class='position-absolute top-50 translate-middle-y wallpaper-black')
+        div(class='position-absolute top-50 start-50 translate-middle wallpaper-circle-outer')
+          div(class='position-absolute top-50 start-50 translate-middle wallpaper-circle-inner')
+    div(class='navbar navbar-expand-lg bg-body-tertiary')
+      div(class='container-fluid navbar-navigation')
+        strong
+          a(class='navbar-brand' href='/pokedex') Pokedex
+        ul(class='navbar-nav me-auto mb-0')
+          li(class='nav-item')
+            strong
+              a(class='nav-link' href='/pokedex/pokemons') Pokemons
+          li(class='nav-item')
+            strong
+              a(class='nav-link' href='/pokedex/types') Types
+    hr(style='margin: 0')
+    div(class='container-fluid content-container row')
+      block content
           
