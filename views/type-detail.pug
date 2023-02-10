@@ -1,0 +1,28 @@
+extends layout 
+
+block content 
+
+  h1 Type: #{type.name}
+
+  p #{type.description}
+    
+  div(style='margin-left:20px;margin-top:20px')
+    h4 Pokemons
+
+    dl 
+      each pokemon in type_pokemons
+        dt
+          a(href=pokemon.url) #{pokemon.name}
+
+        dd #{pokemon.description}
+
+      else
+        p There is no pokemons of this type in pokedex.
+
+  hr
+  
+  p
+    a(href=type.url+'/delete') Delete Type
+
+  p
+    a(href=type.url+'/update') Update Type

@@ -9,7 +9,7 @@ exports.index = (req, res, next) => {
 
 exports.pokemonList = (req, res, next) => {
     Pokemon.find({}, 'name serial_number')
-        .sort({ name: 1 })
+        .sort({serial_number: 1 })
         .exec(function (err, pokemons) {
             if (err) {
                 return next(err);

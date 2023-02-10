@@ -13,18 +13,23 @@ html(lang='en')
       div(class='position-absolute top-50 translate-middle-y wallpaper-black')
         div(class='position-absolute top-50 start-50 translate-middle wallpaper-circle-outer')
           div(class='position-absolute top-50 start-50 translate-middle wallpaper-circle-inner')
+
     div(class='navbar navbar-expand-lg bg-body-tertiary')
       div(class='container-fluid navbar-navigation')
         strong
           a(class='navbar-brand' href='/pokedex') Pokedex
+
         ul(class='navbar-nav me-auto mb-0')
           li(class='nav-item')
             strong
               a(class='nav-link' href='/pokedex/pokemons') Pokemons
+
           li(class='nav-item')
             strong
               a(class='nav-link' href='/pokedex/types') Types
+
     hr(style='margin: 0')
+    
     div(class='container-fluid content-container row')
       block content
           

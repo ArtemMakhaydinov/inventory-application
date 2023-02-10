@@ -2,11 +2,15 @@ extends layout
 
 block content
   h1= title
+
+  a(href='/pokedex/type/create' style='margin: 20px auto 20px 20px') Create new Type
+
   - const columns = 6
   - const columnDefaultHeight = 5
   - const columnHeight = (typeList.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(typeList.length / columns)
+  
   - for (let i = 0; i <= typeList.length / columnHeight; i++) {
-    div(class='col-2' style='margin-top: 1rem; line-height: 2rem')
+    div(class='col-2' style='line-height: 2rem; margin-left: 20px')
       ul
         - let columnArray = typeList.slice((i * columnHeight), ((i + 1) * columnHeight))
         each type in columnArray
