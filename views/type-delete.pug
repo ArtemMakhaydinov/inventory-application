@@ -9,19 +9,19 @@ block content
 
     div(style='margin-left:20px;margin-top:20px')
 
-    
+
       h4 Pokemons
 
       ul
       each pokemon in type_pokemons
         li
           a(href=pokemon.url) #{pokemon.name}
-  
+
   else 
     p Do you really want to delete this Type?
 
     form(method='POST' action='')
       div.form-group
-        input#typeid.form-control(type='hidden',name='typeid', required='true', value=type._id )
+        input#typeid.form-control(type='hidden' name='typeid' required='true', value=type._id )
 
       button.btn.btn-primary(type='submit') Delete

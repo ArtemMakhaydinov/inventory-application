@@ -10,9 +10,10 @@ exports.typeList = (req, res, next) => {
             if (err) {
                 return next(err);
             }
+
             res.render('type-list', {
                 title: 'Type list',
-                typeList: types,
+                types,
             });
         });
 };
@@ -26,11 +27,22 @@ exports.typeCreatePost = (req, res, next) => {
         name: req.body.name,
         description: req.body.description,
     });
-    type.save((err) => {
+
+    Type.findOne({ name: req.body.name }, (err, found_type) => {
         if (err) {
             return next(err);
         }
-        res.redirect(type.url);
+
+        if (found_type) {
+            res.redirect(found_type.url);
+        } else {
+            type.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect(type.url);
+            });
+        }
     });
 };
 
@@ -48,9 +60,11 @@ exports.typeDeleteGet = (req, res, next) => {
             if (err) {
                 return next(err);
             }
+
             if (results.type === null) {
                 res.redirect('/pokedex/types');
             }
+
             res.render('type-delete', {
                 title: 'Delete Type',
                 type: results.type,
@@ -74,6 +88,7 @@ exports.typeDeletePost = (req, res, next) => {
             if (err) {
                 return next(err);
             }
+
             if (results.type_pokemons.length > 0) {
                 res.render('type_delete', {
                     title: 'Delete Type',
@@ -81,6 +96,7 @@ exports.typeDeletePost = (req, res, next) => {
                     type_pokemons: results.type_pokemons,
                 });
             }
+
             Type.findByIdAndRemove(req.body.typeid, (err) => {
                 if (err) {
                     return next(err);
@@ -96,11 +112,13 @@ exports.typeUpdateGet = (req, res, next) => {
         if (err) {
             return next(err);
         }
+
         if (type == null) {
             const err = new Error('Type not found.');
             err.status = 404;
             return next(err);
         }
+
         res.render('type-form', {
             title: 'Update Type',
             type,
@@ -113,19 +131,15 @@ exports.typeUpdatePost = (req, res, next) => {
         name: req.body.name,
         description: req.body.description,
         _id: req.params.id,
-    })
+    });
 
-    Type.findByIdAndUpdate(
-        req.params.id,
-        type,
-        {},
-        (err, updatedType) => {
-            if (err) {
-                return next (err)
-            }
-            res.redirect(updatedType.url)
+    Type.findByIdAndUpdate(req.params.id, type, {}, (err, updatedType) => {
+        if (err) {
+            return next(err);
         }
-        )
+
+        res.redirect(updatedType.url);
+    });
 };
 
 exports.typeDetail = (req, res, next) => {
@@ -142,11 +156,13 @@ exports.typeDetail = (req, res, next) => {
             if (err) {
                 return next(err);
             }
+
             if (results.type === null) {
                 const err = new Error('Type not found.');
                 err.status = 404;
                 return next(err);
             }
+
             res.render('type-detail', {
                 title: 'Type Detail',
                 type: results.type,

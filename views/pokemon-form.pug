@@ -1,0 +1,42 @@
+extends layout 
+
+block content 
+  h1= title 
+
+  form(method='POST' action='')
+    div.mb-3
+      label.form-label(for='name') Pokemon
+      input#name.form-control(type='text' placeholder='Enter pokemon name' name='name' required='true' value=(undefined===pokemon ? '' : pokemon.name))
+
+    div.mb-3
+      label.form-label(for='serial_number') Serial number 
+      input#serial_number.form-control(type='number' placeholder='0' name='serial_number' max='9999' value=(undefined===pokemon ? '' : pokemon.serial_number))
+
+    div.mb-3
+      label.form-label(for='description') Description
+      input#description.form-control(type='text' placeholder='Short description about pokemon' name='description' value=(undefined===pokemon ? '' : pokemon.description))
+
+    div.mb-3
+      label.form-label Type
+      div.row
+        - const columns = 6
+        - const columnDefaultHeight = 5
+        - const columnHeight = (types.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(types.length / columns)
+
+        - for (let i = 0; i <= types.length / columnHeight; i++) {
+          div(class='col-2')
+            ul
+              - let columnArray = types.slice((i * columnHeight), ((i + 1) * columnHeight))
+              each type in columnArray
+                li
+                  div(style='padding-left: 10px')
+                    input.checkbox-input(type='checkbox' name='type' id=type._id value=type._id checked=type.checked)
+                    label.form-label(for=type._id style='padding-left: 10px') #{type.name}
+        - }
+
+    button.btn.btn-primary(type='submit') Submit
+
+    if errors
+      ul 
+        for error in errors
+          li!= error.msg

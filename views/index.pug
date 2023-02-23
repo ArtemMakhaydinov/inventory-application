@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Welcome to #{title}
+
+  if error 
+    p Error getting content from database.
+  else 
+    p(style='margin-top:1rem') Pokedex has the following record counts:
+    ul(style='padding-left:2rem; font-size:1.3rem')
+      li Pokemons: !{data.pokemonCount}
+      li Types: !{data.typeCount}

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+  h1 #{pokemon.formatted_serial_number} #{pokemon.name}
+
+  div.mt-2.mb-3
+    for type in pokemon.type
+      a(href=type.url style='padding-left: 10px; display: inline') #{type.name}
+
+  p #{pokemon.description}
+
+  hr
+
+  p
+    a(href=pokemon.url+'/delete') Delete Pokemon
+
+  p
+    a(href=pokemon.url+'/update') Update Pokemon

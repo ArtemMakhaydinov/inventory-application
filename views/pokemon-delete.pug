@@ -1,0 +1,12 @@
+extend layout 
+
+block content
+  h1 #{title}: #{pokemon.name}
+
+  p Do you really want to delete this Pokemon?
+
+  form(method='POST' action='')
+    div.form-group
+      input#typeid.form-control(type='hidden' name='pokemonid' required='true' value=pokemon._id)
+    
+    button.btn.btn-primary(type='submit') Delete 

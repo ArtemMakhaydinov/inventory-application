@@ -13,7 +13,7 @@ PokemonSchema.virtual('url').get(function () {
 });
 
 PokemonSchema.virtual('formatted_serial_number').get(function () {
-    if (this.serial_number === undefined) return '#????';
+    if (this.serial_number === null || this.serial_number === undefined) return '#????';
     if (this.serial_number > 999) return `#${this.serial_number}`;
     if (this.serial_number > 99) return `#0${this.serial_number}`;
     if (this.serial_number > 9) return `#00${this.serial_number}`;

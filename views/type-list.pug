@@ -3,20 +3,20 @@ extends layout
 block content
   h1= title
 
-  a(href='/pokedex/type/create' style='margin: 20px auto 20px 20px') Create new Type
+  a(href='/pokedex/type/create' style='margin: 20px auto 20px 20px') #[strong Create new Type]
 
   - const columns = 6
   - const columnDefaultHeight = 5
-  - const columnHeight = (typeList.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(typeList.length / columns)
-  
-  - for (let i = 0; i <= typeList.length / columnHeight; i++) {
+  - const columnHeight = (types.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(types.length / columns)
+
+  - for (let i = 0; i <= types.length / columnHeight; i++) {
     div(class='col-2' style='line-height: 2rem; margin-left: 20px')
       ul
-        - let columnArray = typeList.slice((i * columnHeight), ((i + 1) * columnHeight))
+        - let columnArray = types.slice((i * columnHeight), ((i + 1) * columnHeight))
         each type in columnArray
           li
             a(href=type.url) #{type.name}
 
-        if typeList.length === 0
+        if types.length === 0
           li There are no types.
   - }
