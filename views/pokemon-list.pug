@@ -10,7 +10,7 @@ block content
   - const columnHeight = (pokemonList.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(pokemonList.length / columns)
 
   - for (let i = 0; i <= pokemonList.length / columnHeight; i++) {
-    div(class='col-2' style='line-height: 2rem; margin-left: 20px')
+    div.col-2(style='line-height: 2rem; margin-left: 20px')
       ul
         - let columnArray = pokemonList.slice((i * columnHeight), ((i + 1) * columnHeight))
         each pokemon in columnArray

@@ -10,7 +10,7 @@ block content
   - const columnHeight = (types.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(types.length / columns)
 
   - for (let i = 0; i <= types.length / columnHeight; i++) {
-    div(class='col-2' style='line-height: 2rem; margin-left: 20px')
+    div.col-2(style='line-height: 2rem; margin-left: 20px')
       ul
         - let columnArray = types.slice((i * columnHeight), ((i + 1) * columnHeight))
         each type in columnArray

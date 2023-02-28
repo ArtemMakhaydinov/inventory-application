@@ -14,7 +14,7 @@ block content
 
     div.mb-3
       label.form-label(for='description') Description
-      input#description.form-control(type='text' placeholder='Short description about pokemon' name='description' value=(undefined===pokemon ? '' : pokemon.description))
+      input#description.form-control(type='text' placeholder='Short description about pokemon' name='description' required='true' value=(undefined===pokemon ? '' : pokemon.description))
 
     div.mb-3
       label.form-label Type
@@ -24,7 +24,7 @@ block content
         - const columnHeight = (types.length < columnDefaultHeight * columns) ? columnDefaultHeight : Math.ceil(types.length / columns)
 
         - for (let i = 0; i <= types.length / columnHeight; i++) {
-          div(class='col-2')
+          div.col-2
             ul
               - let columnArray = types.slice((i * columnHeight), ((i + 1) * columnHeight))
               each type in columnArray
@@ -37,6 +37,6 @@ block content
     button.btn.btn-primary(type='submit') Submit
 
     if errors
-      ul 
+      ul(style='margin-top: 1rem; color: red')
         for error in errors
-          li!= error.msg
+          li!= error.message || error.msg

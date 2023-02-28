@@ -1,46 +1,59 @@
 const express = require('express');
 const router = express.Router();
 
-const pokemonController = require('../controllers/pokemon-controller');
-const typeController = require('../controllers/type-controller');
+// const pokemonController = require('../controllers/pokemon-controller');
+// const typeController = require('../controllers/type-controller');
+
+const index = require('../controllers/index');
+
+const pokemonList = require('../controllers/pokemon-controllers/pokemon-list');
+const pokemonCreate = require('../controllers/pokemon-controllers/pokemon-create');
+const pokemonDelete = require('../controllers/pokemon-controllers/pokemon-delete');
+const pokemonUpdate = require('../controllers/pokemon-controllers/pokemon-update');
+const pokemonDetail = require('../controllers/pokemon-controllers/pokemon-detail');
+
+const typeList = require('../controllers/type-controllers/type-list');
+const typeCreate = require('../controllers/type-controllers/type-create');
+const typeDelete = require('../controllers/type-controllers/type-delete');
+const typeUpdate = require('../controllers/type-controllers/type-update');
+const typeDetail = require('../controllers/type-controllers/type-detail');
 
 // POKEMON ROUTES
 
-router.get('/', pokemonController.index);
+router.get('/', index.get);
 
-router.get('/pokemon/create', pokemonController.pokemonCreateGet);
+router.get('/pokemon/create', pokemonCreate.get);
 
-router.post('/pokemon/create', pokemonController.pokemonCreatePost);
+router.post('/pokemon/create', pokemonCreate.post);
 
-router.get('/pokemon/:id/delete', pokemonController.pokemonDeleteGet);
+router.get('/pokemon/:id/delete', pokemonDelete.get);
 
-router.post('/pokemon/:id/delete', pokemonController.pokemonDeletePost);
+router.post('/pokemon/:id/delete', pokemonDelete.post);
 
-router.get('/pokemon/:id/update', pokemonController.pokemonUpdateGet);
+router.get('/pokemon/:id/update', pokemonUpdate.get);
 
-router.post('/pokemon/:id/update', pokemonController.pokemonUpdatePost);
+router.post('/pokemon/:id/update', pokemonUpdate.post);
 
-router.get('/pokemon/:id', pokemonController.pokemonDetail);
+router.get('/pokemon/:id', pokemonDetail.get);
 
-router.get('/pokemons', pokemonController.pokemonList);
+router.get('/pokemons', pokemonList.get);
 
 // TYPE ROUTES
 
+router.get('/type/create', typeCreate.get);
 
-router.get('/type/create', typeController.typeCreateGet);
+router.post('/type/create', typeCreate.post);
 
-router.post('/type/create', typeController.typeCreatePost);
+router.get('/type/:id/delete', typeDelete.get);
 
-router.get('/type/:id/delete', typeController.typeDeleteGet);
+router.post('/type/:id/delete', typeDelete.post);
 
-router.post('/type/:id/delete', typeController.typeDeletePost);
+router.get('/type/:id/update', typeUpdate.get);
 
-router.get('/type/:id/update', typeController.typeUpdateGet);
+router.post('/type/:id/update', typeUpdate.post);
 
-router.post('/type/:id/update', typeController.typeUpdatePost);
+router.get('/type/:id', typeDetail.get);
 
-router.get('/type/:id', typeController.typeDetail);
-
-router.get('/types', typeController.typeList);
+router.get('/types', typeList.get);
 
 module.exports = router;
