@@ -1,6 +1,4 @@
-const Pokemon = require('../../models/pokemon-model');
 const Type = require('../../models/type-model');
-const async = require('async');
 const { body, param, validationResult } = require('express-validator');
 
 // GET
@@ -42,7 +40,7 @@ const postValidation = [
 ];
 
 const repeatOrValidErr = (res, errors, repeat, type) => {
-    errors = errors.array();
+    errors = errors.isEmpty() ? [] : errors.array();
 
     if (repeat) {
         const err = new Error('Type with provided Name already exist.');
@@ -75,18 +73,17 @@ const tryUpdateRecord = (req, res, next) => {
     });
 
     Type.findOne(
-        { name: req.body.name },
-        { _id: req.params.id },
+        { $and: [{ name: req.body.name }, { _id: { $ne: req.params.id } }] },
         (err, repeat) => {
             if (err) {
                 return next(err);
             }
 
             if (!errors.isEmpty() || repeat) {
-                repeatOrValidErr(res, errors, repeat, type);
-            } else {
-                updateRecord(req, res, next, type);
+                return repeatOrValidErr(res, errors, repeat, type);
             }
+
+            updateRecord(req, res, next, type);
         }
     );
 };

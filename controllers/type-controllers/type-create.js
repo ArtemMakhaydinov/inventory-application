@@ -21,11 +21,10 @@ const postValidation = [
 ];
 
 const repeatOrValidErr = (res, errors, repeat, type) => {
+    errors = errors.isEmpty() ? [] : errors.array();
+
     if (repeat) {
-        const err = new Error(
-            'Type with provided Name already exist.'
-        );
-        errors = errors.Array()
+        const err = new Error('Type with provided Name already exist.');
         errors.push(err);
     }
 
@@ -34,7 +33,7 @@ const repeatOrValidErr = (res, errors, repeat, type) => {
         type,
         errors,
     });
-}
+};
 
 const createRecord = (req, res, next, type) => {
     type.save((err) => {
@@ -44,7 +43,7 @@ const createRecord = (req, res, next, type) => {
 
         res.redirect(type.url);
     });
-}
+};
 
 const tryCreateRecord = (req, res, next) => {
     const errors = validationResult(req);
@@ -60,10 +59,10 @@ const tryCreateRecord = (req, res, next) => {
         }
 
         if (!errors.isEmpty() || repeat) {
-            repeatOrValidErr(res, errors, repeat, type);
-        } else {
-            createRecord(req, res, next, type)
+            return repeatOrValidErr(res, errors, repeat, type);
         }
+
+        createRecord(req, res, next, type);
     });
 };
 

@@ -56,6 +56,8 @@ const queryForRepeats = (req) => {
 };
 
 const repeatOrValidErr = (res, errors, repeat, pokemon) => {
+    errors = errors.isEmpty() ? [] : errors.array();
+
     Type.find({}, 'name')
         .sort({ name: 1 })
         .exec(function (err, types) {
@@ -73,7 +75,6 @@ const repeatOrValidErr = (res, errors, repeat, pokemon) => {
                 const err = new Error(
                     'Pokemon with provided Name or Serial Number already exist.'
                 );
-                errors = errors.Array()
                 errors.push(err);
             }
 
@@ -112,10 +113,10 @@ const tryCreateRecord = (req, res, next) => {
         }
 
         if (!errors.isEmpty() || repeat) {
-            repeatOrValidErr(res, errors, repeat, pokemon);
-        } else {
-            createRecord(req, res, next, pokemon);
+            return repeatOrValidErr(res, errors, repeat, pokemon);
         }
+
+        createRecord(req, res, next, pokemon);
     });
 };
 

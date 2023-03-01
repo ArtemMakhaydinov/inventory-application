@@ -98,7 +98,7 @@ const queryForRepeats = (req) => {
 };
 
 const repeatOrValidErr = (res, errors, repeat, pokemon) => {
-    errors = errors.array();
+    errors = errors.isEmpty() ? [] : errors.array();
 
     Type.find({}, 'name')
         .sort({ name: 1 })
@@ -160,10 +160,10 @@ const tryUpdateRecord = (req, res, next) => {
         }
 
         if (!errors.isEmpty() || repeat) {
-            repeatOrValidErr(res, errors, repeat, pokemon);
-        } else {
-            updateRecord(req, res, next, pokemon);
+            return repeatOrValidErr(res, errors, repeat, pokemon);
         }
+
+        updateRecord(req, res, next, pokemon);
     });
 };
 
